@@ -1,0 +1,11 @@
+#exclude development folders and files
+env/*
+**/__pycache__/*
+.vscode/*
+**/development.db
+#exclude files in files folder
+**/uploads/*
+**/reports/*
+#exception to the rules
+!**/uploads/.gitkeep
+!**/reports/.gitkeep

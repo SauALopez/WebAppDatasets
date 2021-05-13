@@ -1,0 +1,53 @@
+{% extends 'graph/templates/navbar.html' %}
+{% block title %}Agregar{% endblock %}
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href='{{ url_for(".upload_dataset") }}'>Agregar Dataset</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" aria-current="page" href='{{ url_for(".recent_dataset") }}'>Dataset Recientes</a>
+</li>
+{% endblock %}
+
+
+{% block head %}
+<div class="upload-header px-e py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-3"> Agregar Dataset</h1>
+</div>
+{% endblock %}
+
+
+{% block body %}
+<form action='{{ url_for(".upload_dataset") }}' class="row g-2" method="POST" enctype="multipart/form-data">
+    <div class="col-6">
+        <div class="form-floating">
+            <input type="text" class="form-control" name="DatasetName" id="DatasetName" maxlength="50" required>
+            <label for="floatingInputGrid">Nombre de dataset</label>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-floating">
+            <input type="date" class="form-control" name="DatasetDate" id="DatasetDate" required>
+            <label for="floatingInputGrid">Fecha de dataset</label>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-floating">
+            <textarea class="form-control" name="DatasetDescription"  id="DatasetDescription" maxlength="150" required></textarea>
+            <label for="floatingInputGrid">Descripcion</label>
+        </div>
+    </div>
+    <div class="col-6">
+        <label class="custom-file">
+            <input type="file" name="data" id="" placeholder="" class="custom-file-input" aria-describedby="fileHelpId" required>
+            <span class="custom-file-control"></span>
+        </label>
+        <small id="fileHelpId" class="form-text text-muted">Formato TXT, Ejemplo: 'dataset.txt'</small>
+    </div>
+    <div class="col-6">
+        <button type="submit" class="btn btn-primary">Subir Dataset</button>
+    </div>
+</form>
+
+
+{% endblock %}

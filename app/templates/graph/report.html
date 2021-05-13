@@ -1,0 +1,84 @@
+{% extends 'graph/templates/base.html' %}
+{% block title %}REPORTE{% endblock %}
+
+
+
+{% block body %}
+      
+{% for key in data%}
+<div class="row my-0">  
+    <div class="col-md-6 py-0">
+        <div class="card text center">
+            <div class="card-body center">
+                <h1 class="center">{{ key.KEY }}</h1>
+                <img id= '{{key.KEY}}' class="img-fluid" alt="Responsive image">
+                <script>
+                    keydata = {{key | tojson}}
+                    console.log(keydata)
+                    chartConfig = {
+                        type: "bar",
+                        data: {
+                            labels: keydata.IDS,
+                            datasets: 
+                            [
+                                {
+                                    label: "MODA",
+                                    data: keydata.moda,
+                                    backgroundColor: "rgba(168, 0, 14, 0.25)"                                 ,
+                                },
+                                {
+                                    label: "MEDIA",
+                                    data: keydata.media,
+                                    backgroundColor: "rgba(22, 0, 168 ,0.25)",
+                                },
+                                {
+                                    label: "MEDIANA",
+                                    data: keydata.mediana,
+                                    backgroundColor: "rgba(0, 168, 34, 0.25)",
+                                }
+                            ]
+                        }
+                    };
+                    chartConfig = JSON.stringify(chartConfig);
+                    chartUrl = 'https://quickchart.io/chart?w=800&h=400&c='+ encodeURI(chartConfig);
+                    document.getElementById("{{key.KEY}}").src = chartUrl;
+                </script>
+            </div>
+        </div>
+    </div>        
+    
+    <div class="col-md-4 py-0">
+        <div class="card text center">
+            <div class="card-body center">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th># Sensor</th>
+                                <th>Moda</th>
+                                <th>Mediana</th>
+                                <th>Media</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in range(n_ids) %}
+                            <tr>
+                                <td>{{ key.IDS[i] }}</td>
+                                <td>{{ key.moda[i] }}</td>
+                                <td>{{ key.mediana[i] }}</td>
+                                <td>{{ key.media[i] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}  
+
+
+
+
+{% endblock %}
