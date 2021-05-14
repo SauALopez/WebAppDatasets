@@ -16,8 +16,14 @@
 </div>
 {% endblock %}
 
+
+
+
+{% block body %}
+
+
 <div class="row my-3 center">
-    {% for dataset in data %}  
+    {% for dataset in data %}
     <div class="col-md-4 py-3">
         <div class="card text center">
             <div class="card-body center">
@@ -29,12 +35,6 @@
     </div>
     {% endfor %}  
 </div> 
-
-
-{% block body %}
-
-
-
 
 
 
