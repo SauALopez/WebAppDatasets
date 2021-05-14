@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, url_for , request , redirect, send_from_directory, abort
 from app.models.dataset_model import db, datasets, datetime 
+from sqlalchemy.sql import func
 from data_wrangling import Sensors
 import os
 import pdfkit
@@ -93,7 +94,8 @@ def view_dataset():
 
 @app.route('/recent-datasets',methods=["GET", "POST"])
 def recent_dataset():
-    return render_template('graph/recent-dataset.html')
+    listofdatasets = db.session.query(datasets.id, datasets.name, datasets.description,func.date(datasets.date_dataset)).order_by(datasets.date_entry.desc()).all()
+    return render_template('graph/recent-dataset.html', data=listofdatasets)
 
 @app.route('/originaldataset')
 def original():

@@ -16,7 +16,19 @@
 </div>
 {% endblock %}
 
-
+<div class="row my-3 center">
+    {% for dataset in data %}  
+    <div class="col-md-4 py-3">
+        <div class="card text center">
+            <div class="card-body center">
+              <h3 class="card-title">Titulo: {{dataset[1]}}</h3>
+              <p class="card-text">Descripcion: {{dataset[2]}}</p>
+              <a href='{{ url_for(".view_dataset") }}?id={{dataset[0]}}&key=humidity' class="btn btn-primary">Ver Dataset</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}  
+</div> 
 
 
 {% block body %}
